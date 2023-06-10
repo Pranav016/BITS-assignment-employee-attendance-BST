@@ -47,8 +47,11 @@ public class EmpBST {
     if (root.id == id) {
       return true;
     }
-    boolean leftResponse = searchID(root.left, id);
-    boolean rightResponse = searchID(root.right, id);
+    if (root.id > id) {
+      boolean leftResponse = searchID(root.left, id);
+    } else {
+      boolean rightResponse = searchID(root.right, id);
+    }
 
     if (leftResponse || rightResponse) {
       return true;

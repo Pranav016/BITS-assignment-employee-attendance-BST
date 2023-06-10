@@ -36,26 +36,23 @@ public class EmployeeAttendance {
       }
       switch (input) {
         case 1:
+          int empId1 = -1;
           // assuming the delimiter to be -1
           // we could also have inputted a count of the employees to be entered
-          System.out.print("Enter Employee Id:");
-          int empId1 = -1;
-          try {
-            empId1 = scanner.nextInt();
-          } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter an integer.");
-            break;
-          }
-          while (empId1 != -1) {
-            if (empId1 <= 0) {
-              System.out.println("Please enter a valid ID");
-            } else {
-              root = bst.readEmployees(root, empId1);
-            }
+
+          boolean flag = true;
+          while (flag) {
             System.out.print("Enter Employee Id: ");
-            try {
+            if (scanner.hasNextInt()) {
               empId1 = scanner.nextInt();
-            } catch (InputMismatchException e) {
+              if (empId1 == -1) {
+                break;
+              } else if (empId1 <= 0) {
+                System.out.println("Please enter a valid ID");
+              } else {
+                root = bst.readEmployees(root, empId1);
+              }
+            } else {
               System.out.println("Invalid input. Please enter an integer.");
               break;
             }
@@ -136,10 +133,11 @@ public class EmployeeAttendance {
           break;
       }
       displayOptions();
-      try {
+      if (scanner.hasNextInt()) {
         input = scanner.nextInt();
-      } catch (InputMismatchException e) {
+      } else {
         System.out.println("Invalid input. Please enter an integer.");
+        break;
       }
     }
   }
